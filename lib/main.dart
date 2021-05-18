@@ -28,14 +28,21 @@ class _MyAppState extends State<MyApp> {
       // If the server did return a 200 OK response,
       // then parse the JSON.
       var jsonResponse = jsonDecode(response.body) as Map<String, dynamic>;
-      jsonResponse["consolidated_weather"].removeLast();
+      if (jsonResponse["consolidated_weather"] != null) {
+        if (jsonResponse["consolidated_weather"].length >= 6) {
+          jsonResponse["consolidated_weather"].removeLast();
+        }
 
-      List<ConsolidatedWeather> array = new List<ConsolidatedWeather>.from(jsonResponse["consolidated_weather"]
-          .map((consolidatedWeather) =>
-              ConsolidatedWeather.fromJson(consolidatedWeather))
-          .toList());
+        List<ConsolidatedWeather> array = new List<ConsolidatedWeather>.from(
+          jsonResponse["consolidated_weather"]
+              .map((consolidatedWeather) =>
+                  ConsolidatedWeather.fromJson(consolidatedWeather))
+              .toList());
 
-      return array;
+        return array;
+      } else {
+        throw Exception('Location not found');
+      }
     } else {
       // If the server did not return a 200 OK response,
       // then throw an exception.
@@ -75,14 +82,17 @@ class _MyAppState extends State<MyApp> {
                   future: consolidatedWeatherArray,
                   builder: (context, snapshot) {
                     if (snapshot.hasData) {
-                      return DailyForecastList(consolidatedWeatherArray: snapshot.data!,);
+                      return DailyForecastList(
+                        consolidatedWeatherArray: snapshot.data!,
+                      );
                     } else if (snapshot.hasError) {
                       return Text("${snapshot.error}");
                     }
 
                     // By default, show a loading spinner.
                     return CircularProgressIndicator();
-                  },)
+                  },
+                )
               ])
             ],
           ),
