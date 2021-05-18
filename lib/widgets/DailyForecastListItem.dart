@@ -10,11 +10,11 @@ class DailyForecastListItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: 200,
+      width: 220,
       child: Column(
         children: [
           Container(
-              width: 200,
+              width: 220,
               decoration: BoxDecoration(
                   border: Border.all(color: Colors.grey, width: 3)),
               child: Padding(

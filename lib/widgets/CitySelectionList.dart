@@ -34,7 +34,7 @@ class _CitySelectionListState extends State<CitySelectionList> {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.all(50),
+      padding: const EdgeInsets.fromLTRB(0, 50, 0, 50),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceAround,
         children: widget.cities
