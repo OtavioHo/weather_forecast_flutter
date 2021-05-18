@@ -34,6 +34,7 @@ class _MyAppState extends State<MyApp> {
       // If the server did return a 200 OK response,
       // then parse the JSON.
       var jsonResponse = jsonDecode(response.body) as Map<String, dynamic>;
+      jsonResponse["consolidated_weather"].removeLast();
       
       setState(() {
         consolidatedWeatherArray =
