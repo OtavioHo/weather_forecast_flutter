@@ -43,6 +43,7 @@ class _CitySelectionListState extends State<CitySelectionList> {
                     widget.onSelectCity(city["woeid"]);
                   },
                   child: MouseRegion(
+                    cursor: SystemMouseCursors.click,
                     onEnter: (event) {
                       _onHover(city["woeid"]);
                     },
