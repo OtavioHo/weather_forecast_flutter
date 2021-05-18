@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
+import '../models/ConsolidatedWeather.dart';
 import 'DailyForecastListItem.dart';
 
 class DailyForecastList extends StatelessWidget {
   DailyForecastList({Key? key, required this.consolidatedWeatherArray}) 
     : super(key: key);
 
-  final List<Map> consolidatedWeatherArray;
+  final List<ConsolidatedWeather> consolidatedWeatherArray;
 
   @override
   Widget build(BuildContext context) {

@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:teapayment_challenge_flutter/models/ConsolidatedWeather.dart';
 import 'widgets/CitySelectionList.dart';
 import 'widgets/DailyForecastList.dart';
+import 'package:http/http.dart' as http;
 
 void main() {
   runApp(MyApp());
@@ -13,7 +15,7 @@ final List<Map> cities = [
   {"city": "São Paulo", "woeid": 455827}
 ];
 
-final List<Map> consolidatedWeather = [
+final List<Map<String, dynamic>> consolidatedWeather = [
   {
     "id": 6686199684005888,
     "weather_state_name": "Heavy Rain",
@@ -111,6 +113,11 @@ class _MyAppState extends State<MyApp> {
   int selectedCity = cities[0]["woeid"];
 
   @override
+  void initState() {
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return MaterialApp(
       home: Scaffold(
@@ -131,7 +138,9 @@ class _MyAppState extends State<MyApp> {
               ]),
               Wrap(children: [
                 DailyForecastList(
-                  consolidatedWeatherArray: consolidatedWeather,
+                  consolidatedWeatherArray: consolidatedWeather
+                      .map((weather) => ConsolidatedWeather.fromJson(weather))
+                      .toList(),
                 )
               ])
             ],
