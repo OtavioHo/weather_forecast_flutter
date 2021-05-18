@@ -26,19 +26,19 @@ class DailyForecastListItem extends StatelessWidget {
                       padding: const EdgeInsets.only(bottom: 10),
                       child: Center(
                           child: Text(
-                        getDay(this.consolidatedWeather.applicable_date),
+                        getDay(this.consolidatedWeather.applicableDate),
                         style: TextStyle(
                             fontSize: 28, fontWeight: FontWeight.w900),
                       )),
                     ),
                     Image.network(
-                      'http://localhost:3333/static/img/weather/png/${this.consolidatedWeather.weather_state_abbr}.png',
+                      'http://localhost:3333/static/img/weather/png/${this.consolidatedWeather.weatherStateAbbr}.png',
                       width: 120,
                     ),
                     Padding(
                       padding: const EdgeInsets.fromLTRB(0, 26.8, 0, 26.8),
                       child: Text(
-                        this.consolidatedWeather.the_temp.toStringAsFixed(1),
+                        this.consolidatedWeather.theTemp.toStringAsFixed(1),
                         style: TextStyle(
                             fontWeight: FontWeight.bold, fontSize: 47),
                       ),
@@ -49,12 +49,12 @@ class DailyForecastListItem extends StatelessWidget {
                         _InfoContainer(
                             label: "min",
                             value: this
-                                .consolidatedWeather.min_temp
+                                .consolidatedWeather.minTemp
                                 .toStringAsFixed(1)),
                         _InfoContainer(
                           label: "max",
                           value: this
-                              .consolidatedWeather.max_temp
+                              .consolidatedWeather.maxTemp
                               .toStringAsFixed(1),
                         )
                       ],
@@ -65,12 +65,12 @@ class DailyForecastListItem extends StatelessWidget {
                         _InfoContainer(
                             label: "wind speed",
                             value: this
-                                .consolidatedWeather.wind_speed
+                                .consolidatedWeather.windSpeed
                                 .toStringAsFixed(1)),
                         _InfoContainer(
                             label: "wind direction",
                             value: this
-                                .consolidatedWeather.wind_direction_compass
+                                .consolidatedWeather.windDirectionCompass
                                 .toString())
                       ],
                     )

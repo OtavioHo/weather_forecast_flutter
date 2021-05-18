@@ -1,31 +1,31 @@
 class ConsolidatedWeather {
-  final String applicable_date;
-  final String weather_state_abbr;
-  final double the_temp;
-  final double min_temp;
-  final double max_temp;
-  final double wind_speed;
-  final String wind_direction_compass;
+  final String applicableDate;
+  final String weatherStateAbbr;
+  final double theTemp;
+  final double minTemp;
+  final double maxTemp;
+  final double windSpeed;
+  final String windDirectionCompass;
 
   ConsolidatedWeather({
-      required this.applicable_date,
-      required this.weather_state_abbr,
-      required this.the_temp,
-      required this.min_temp,
-      required this.max_temp,
-      required this.wind_speed,
-      required this.wind_direction_compass
+      required this.applicableDate,
+      required this.weatherStateAbbr,
+      required this.theTemp,
+      required this.minTemp,
+      required this.maxTemp,
+      required this.windSpeed,
+      required this.windDirectionCompass
       });
 
   factory ConsolidatedWeather.fromJson(Map<String, dynamic> json) {
     return ConsolidatedWeather(
-      applicable_date: json["applicable_date"],
-      weather_state_abbr: json["weather_state_abbr"],
-      the_temp: json["the_temp"],
-      min_temp: json["min_temp"],
-      max_temp: json["max_temp"],
-      wind_speed: json["wind_speed"],
-      wind_direction_compass: json["wind_direction_compass"]
+      applicableDate: json["applicable_date"],
+      weatherStateAbbr: json["weather_state_abbr"],
+      theTemp: json["the_temp"],
+      minTemp: json["min_temp"],
+      maxTemp: json["max_temp"],
+      windSpeed: json["wind_speed"],
+      windDirectionCompass: json["wind_direction_compass"]
     );
   }
 }
