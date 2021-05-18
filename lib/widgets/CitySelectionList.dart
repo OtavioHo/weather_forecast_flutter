@@ -7,14 +7,21 @@ class CitySelectionList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-      children: cities
-          .map((city) => Container(
-                height: 30,
-                child: Text("${city["city"]}"),
-              ))
-          .toList(),
+    return Padding(
+      padding: const EdgeInsets.all(50),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceAround,
+        children: cities
+            .map((city) => Container(
+                  decoration: BoxDecoration(
+                      border: Border.all(color: Colors.grey, width: 3)),
+                  child: Padding(
+                    padding: const EdgeInsets.all(20),
+                    child: Center(child: Text("${city["city"]}")),
+                  ),
+                ))
+            .toList(),
+      ),
     );
   }
 }

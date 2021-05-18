@@ -10,7 +10,7 @@ class DailyForecastList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+      mainAxisAlignment: MainAxisAlignment.spaceAround,
       children: consolidatedWeatherArray.map(
         (consolidatedWeather) => 
           DailyForecastListItem(consolidatedWeather: consolidatedWeather,)).toList(),);
