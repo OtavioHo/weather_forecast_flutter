@@ -4,17 +4,11 @@ import 'widgets/CitySelectionList.dart';
 import 'widgets/DailyForecastList.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
+import 'constants/cities.dart';
 
 void main() {
   runApp(MyApp());
 }
-
-final List<Map> cities = [
-  {"city": "Lisbon", "woeid": 742676},
-  {"city": "London", "woeid": 44418},
-  {"city": "New York", "woeid": 2459115},
-  {"city": "São Paulo", "woeid": 455827}
-];
 
 class MyApp extends StatefulWidget {
   // This widget is the root of your application.
@@ -24,9 +18,9 @@ class MyApp extends StatefulWidget {
 
 class _MyAppState extends State<MyApp> {
   int selectedCity = cities[0]["woeid"];
-  List<dynamic> consolidatedWeatherArray = [];
+  late Future<List<ConsolidatedWeather>> consolidatedWeatherArray;
 
-  Future<void> fetchWeather() async {
+  Future<List<ConsolidatedWeather>> fetchWeather() async {
     final response = await http
         .get(Uri.http('localhost:3333', 'api/location/$selectedCity'));
 
@@ -35,11 +29,13 @@ class _MyAppState extends State<MyApp> {
       // then parse the JSON.
       var jsonResponse = jsonDecode(response.body) as Map<String, dynamic>;
       jsonResponse["consolidated_weather"].removeLast();
-      
-      setState(() {
-        consolidatedWeatherArray =
-            jsonResponse["consolidated_weather"];
-      });
+
+      List<ConsolidatedWeather> array = new List<ConsolidatedWeather>.from(jsonResponse["consolidated_weather"]
+          .map((consolidatedWeather) =>
+              ConsolidatedWeather.fromJson(consolidatedWeather))
+          .toList());
+
+      return array;
     } else {
       // If the server did not return a 200 OK response,
       // then throw an exception.
@@ -51,7 +47,7 @@ class _MyAppState extends State<MyApp> {
   void initState() {
     super.initState();
 
-    fetchWeather();
+    consolidatedWeatherArray = fetchWeather();
   }
 
   @override
@@ -69,18 +65,24 @@ class _MyAppState extends State<MyApp> {
                   onSelectCity: (woeid) {
                     setState(() {
                       selectedCity = woeid;
+                      consolidatedWeatherArray = fetchWeather();
                     });
-                    fetchWeather();
                   },
                 ))
               ]),
               Wrap(children: [
-                DailyForecastList(
-                  consolidatedWeatherArray: consolidatedWeatherArray
-                      .map((consolidatedWeather) =>
-                          ConsolidatedWeather.fromJson(consolidatedWeather))
-                      .toList(),
-                )
+                FutureBuilder<List<ConsolidatedWeather>>(
+                  future: consolidatedWeatherArray,
+                  builder: (context, snapshot) {
+                    if (snapshot.hasData) {
+                      return DailyForecastList(consolidatedWeatherArray: snapshot.data!,);
+                    } else if (snapshot.hasError) {
+                      return Text("${snapshot.error}");
+                    }
+
+                    // By default, show a loading spinner.
+                    return CircularProgressIndicator();
+                  },)
               ])
             ],
           ),
