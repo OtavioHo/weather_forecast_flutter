@@ -1,16 +1,25 @@
-# teapayment_challenge_flutter
+# Weather App
 
-A new Flutter project.
+A simple flutter web app that display the forecast for the next 5 days.
+The app uses the [metaweather](https://www.metaweather.com/api/) api.
 
-## Getting Started
+## Running the application
 
-This project is a starting point for a Flutter application.
+1. Set API proxy
+MetaWeather API doesn't support CORS, to make the app work properly you can setup a proxy server to serve the data.
+I built one using Express.js, check the instructions [here](https://github.com/OtavioHo/meta_weather_proxy)
 
-A few resources to get you started if this is your first Flutter project:
+2. Clone repository
+```
+git clone https://github.com/OtavioHo/weather_forecast_flutter
+```
 
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
+3. cd into folder
+```
+cd weather_forecast_flutter
+```
 
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+4. Run App
+```
+flutter run 
+``` 
