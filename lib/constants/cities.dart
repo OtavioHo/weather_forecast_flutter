@@ -3,5 +3,5 @@ final List<Map> cities = [
   {"city": "London", "woeid": 44418},
   {"city": "New York", "woeid": 2459115},
   {"city": "São Paulo", "woeid": 455827},
-  {"city": "Error", "woeid": -99},
+  // {"city": "Error", "woeid": -99},
 ];
