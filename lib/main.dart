@@ -29,10 +29,6 @@ class _MyAppState extends State<MyApp> {
       // then parse the JSON.
       var jsonResponse = jsonDecode(response.body) as Map<String, dynamic>;
       if (jsonResponse["consolidated_weather"] != null) {
-        if (jsonResponse["consolidated_weather"].length >= 6) {
-          jsonResponse["consolidated_weather"].removeLast();
-        }
-
         List<ConsolidatedWeather> array = new List<ConsolidatedWeather>.from(
           jsonResponse["consolidated_weather"]
               .map((consolidatedWeather) =>
