@@ -23,3 +23,4 @@ cd weather_forecast_flutter
 ```
 flutter run 
 ``` 
+Select the *Web* option.
